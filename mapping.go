@@ -7,10 +7,10 @@
 package gtfsparser
 
 import (
-	"fmt"
-	"github.com/geops/gtfsparser/gtfs"
-	"strconv"
 	"errors"
+	"fmt"
+	"github.com/morozka/gtfsparser/gtfs"
+	"strconv"
 	"strings"
 )
 
@@ -303,7 +303,6 @@ func createTransfer(r map[string]string, stops map[string]*gtfs.Stop) *gtfs.Tran
 		panic(errors.New("No stop with id " + getString("to_stop_id", r, true) + " found."))
 	}
 
-
 	a.Transfer_type = getRangeInt("transfer_type", r, false, 0, 3)
 	a.Min_transfer_time = getPositiveInt("min_transfer_time", r, false)
 
@@ -351,7 +350,7 @@ func getRangeInt(name string, r map[string]string, req bool, min int, max int) i
 			panic(errors.New(fmt.Sprintf("Expected integer for field '%s', found '%s'", name, val)))
 		}
 
-		if (num > max || num < min) {
+		if num > max || num < min {
 			panic(errors.New(fmt.Sprintf("Expected integer between %d and %d for field '%s', found %s", min, max, name, val)))
 		}
 
@@ -369,7 +368,7 @@ func getRangeIntWithDefault(name string, r map[string]string, min int, max int, 
 			panic(errors.New(fmt.Sprintf("Expected integer for field '%s', found '%s'", name, val)))
 		}
 
-		if (num > max || num < min) {
+		if num > max || num < min {
 			panic(errors.New(fmt.Sprintf("Expected integer between %d and %d for field '%s', found %s", min, max, name, val)))
 		}
 
